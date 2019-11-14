@@ -1,9 +1,11 @@
-package com.example.comicreader;
+package com.example.comicreader.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.WindowManager;
+
+import com.example.comicreader.R;
 
 public class MainActivity extends AppCompatActivity {
 

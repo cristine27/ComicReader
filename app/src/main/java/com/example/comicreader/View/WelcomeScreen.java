@@ -1,4 +1,4 @@
-package com.example.comicreader;
+package com.example.comicreader.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.view.WindowManager;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.example.comicreader.R;
 
 public class WelcomeScreen extends AppCompatActivity {
     protected int waktu_delay = 3000;
@@ -21,7 +22,7 @@ public class WelcomeScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(WelcomeScreen.this,MainActivity.class);
+                Intent intent = new Intent(WelcomeScreen.this, MainActivity.class);
                 startActivity(intent);
                 Animatoo.animateDiagonal(WelcomeScreen.this);
                 finish();
