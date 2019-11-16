@@ -1,4 +1,4 @@
-package com.example.comicreader;
+package com.example.comicreader.View;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

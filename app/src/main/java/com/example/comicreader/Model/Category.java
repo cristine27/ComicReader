@@ -1,7 +1,9 @@
 package com.example.comicreader.Model;
 
-public class Category {
+import com.google.gson.annotations.SerializedName;
 
+public class Category {
+    @SerializedName("c")
     private String category;
 
     public Category(String category){

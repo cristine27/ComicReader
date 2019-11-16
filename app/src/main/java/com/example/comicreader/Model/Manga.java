@@ -1,15 +1,30 @@
 package com.example.comicreader.Model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 public class Manga {
-    private String alias;
-    private ArrayList<Category> categories;
-    private int hits;
-    private String id;
-    private String image;
-    private String status;
-    private String title;
+    @SerializedName("a")
+    public String alias;
+
+    @SerializedName("c")
+    public ArrayList<Category> categories;
+
+    @SerializedName("h")
+    public int hits;
+
+    @SerializedName("i")
+    public String id;
+
+    @SerializedName("im")
+    public String image;
+
+    @SerializedName("s")
+    public String status;
+
+    @SerializedName("t")
+    public String title;
 
     public Manga(String a, ArrayList<Category> c, int h, String i, String im, String s, String t){
         this.alias=a;
