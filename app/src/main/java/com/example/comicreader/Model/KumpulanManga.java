@@ -3,15 +3,21 @@ package com.example.comicreader.Model;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class KumpulanManga {
-    public ArrayList<Manga> kumpulanManga;
+    @SerializedName("end")
+    public int end;
 
-    public KumpulanManga(){
-        kumpulanManga = new ArrayList<>();
-    }
+    @SerializedName("manga")
+    public List<Manga> kumpulanManga = new ArrayList<>();
 
-    public void addManga(Manga m){
-        this.kumpulanManga.add(m);
-    }
+    @SerializedName("page")
+    public int page;
+
+    @SerializedName("start")
+    public int start;
+
+    @SerializedName("total")
+    public int total;
 }
