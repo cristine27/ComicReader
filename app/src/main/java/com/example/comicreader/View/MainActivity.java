@@ -1,6 +1,8 @@
 package com.example.comicreader.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -19,14 +21,27 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     APIInterface apiInterface;
+    RecyclerView recyclerView;
+    MangaAdapter adapter;
+    ArrayList<Manga> arrayManga;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Recycle View
+        addData();
+        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        adapter = new MangaAdapter(arrayManga);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        //welcome screen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+
+        //web service
         apiInterface = APIClient.getClient().create(APIInterface.class);
 
         Call<Manga> call = apiInterface.getMangaList();
@@ -55,5 +70,10 @@ public class MainActivity extends AppCompatActivity {
                 call.cancel();
             }
         });
+    }
+
+    public void addData(){
+        //add list ke recycle view
+        arrayManga = new ArrayList<>();
     }
 }
