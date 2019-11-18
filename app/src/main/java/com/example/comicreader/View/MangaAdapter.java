@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.comicreader.Model.Manga;
+//import com.example.comicreader.Model.Manga;
 
 import java.util.ArrayList;
 
