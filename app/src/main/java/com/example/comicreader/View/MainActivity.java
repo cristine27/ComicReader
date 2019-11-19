@@ -11,6 +11,8 @@ import com.example.comicreader.Model.KumpulanManga;
 //import com.example.comicreader.Model.Manga;
 import com.example.comicreader.Model.Manga;
 import com.example.comicreader.R;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,39 +38,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Manga> call, Response<Manga> response) {
                 Log.d("TAG",response.code()+"");
-                System.out.println(response.body());
+
                 Manga resource = response.body();
-                resource.setAlias(resource.alias);
-                System.out.println("tes alias "+resource.alias);
-                Manga newManga = new Manga(resource.alias,resource.categories,resource.hits,resource.id,resource.image,resource.lastChapter,
-                resource.status,resource.title);
-                List<Manga> mangalist = new ArrayList<>();
-                mangalist.add(newManga);
-                System.out.println(mangalist.size());
+                String end = resource.end;
+
+                JsonArray mangaObj = resource.kumpulanManga;
+                String page = resource.page;
+                String start = resource.start;
+                String total = resource.total;
+
+                System.out.println("berhasil");
             }
 
             @Override
             public void onFailure(Call<Manga> call, Throwable t) {
+                System.out.println("gagal");
                 call.cancel();
             }
-
-//            @Override
-//            public void onResponse(Call<KumpulanManga> call, Response<KumpulanManga> response) {
-//                Log.d("TAG",response.code()+"");
-//
-//                KumpulanManga resource = response.body();
-//                System.out.println(resource.end);
-//                Integer end = resource.end;
-//                List<Manga> mangaList = resource.kumpulanManga;
-//                Integer page = resource.page;
-//                Integer start = resource.start;
-//                Integer total = resource.total;
-//            }
-//
-//            @Override
-//            public void onFailure(Call<KumpulanManga> call, Throwable t) {
-//                call.cancel();
-//            }
         });
     }
 }

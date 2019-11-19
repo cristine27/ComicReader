@@ -1,52 +1,50 @@
 package com.example.comicreader.Model;
 
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Manga {
-    @SerializedName("a")
-    public String alias;
+    @SerializedName("end")
+    public String end;
 
-    @SerializedName("c")
-    public List<Category> categories = new ArrayList<>();
+    @SerializedName("manga")
+    public JsonArray kumpulanManga = new JsonArray();
 
-    @SerializedName("h")
-    public Integer hits;
+    @SerializedName("page")
+    public String page;
 
-    @SerializedName("i")
-    public String id;
+    @SerializedName("start")
+    public String start;
 
-    @SerializedName("im")
-    public String image;
+    @SerializedName("total")
+    public String total;
 
-    @SerializedName("ld")
-    public Double lastChapter;
+    public class m {
+        @SerializedName("a")
+        public String alias;
 
-    @SerializedName("s")
-    public String status;
+        @SerializedName("c")
+        public JsonObject categories= new JsonObject();
 
-    @SerializedName("t")
-    public String title;
+        @SerializedName("h")
+        public int hits;
 
-    public Manga(String a, List<Category> c, int h, String i, String im,Double lastChapter, String s, String t) {
-        this.alias = a;
-        this.categories = c;
-        this.hits = h;
-        this.id = i;
-        this.image = im;
-        this.lastChapter = lastChapter;
-        this.status = s;
-        this.title = t;
-    }
+        @SerializedName("i")
+        public String id;
 
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
+        @SerializedName("im")
+        public String image;
 
-    private class Category {
-        String category;
+        @SerializedName("s")
+        public String status;
+
+        @SerializedName("t")
+        public String title;
+
+        private class Category {
+            String category;
+        }
     }
 }
