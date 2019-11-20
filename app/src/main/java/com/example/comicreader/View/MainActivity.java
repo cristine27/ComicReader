@@ -13,6 +13,7 @@ import com.example.comicreader.Model.KumpulanManga;
 //import com.example.comicreader.Model.Manga;
 import com.example.comicreader.Model.Manga;
 import com.example.comicreader.R;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -58,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
                 String end = resource.end;
 
                 JsonArray mangaObj = resource.kumpulanManga;
+                Gson gson = new Gson();
+                Manga.m manga = gson.fromJson(mangaObj,Manga.m.class);
                 String page = resource.page;
                 String start = resource.start;
                 String total = resource.total;

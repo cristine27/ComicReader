@@ -30,9 +30,9 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
 
     @Override
     public void onBindViewHolder(MangaViewHolder holder, int position) {
-        holder.title.setText(listManga.get(position).title);
-        holder.poster.setImageResource(Integer.parseInt(listManga.get(position).image));
-        holder.genre.setText(listManga.get(position).categories.size());
+//        holder.title.setText(listManga.get(position).title);
+//        holder.poster.setImageResource(Integer.parseInt(listManga.get(position).image));
+//        holder.genre.setText(listManga.get(position).categories.size());
     }
 
     @Override
