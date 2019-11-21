@@ -5,46 +5,45 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 public class Manga {
-    @SerializedName("end")
-    public String end;
 
-    @SerializedName("manga")
-    public JsonArray kumpulanManga = new JsonArray();
+    public ArrayList<String> categories;
 
-    @SerializedName("page")
-    public String page;
+    public String hits;
 
-    @SerializedName("start")
-    public String start;
+    public String id;
 
-    @SerializedName("total")
-    public String total;
+    public String image;
 
-    public class m {
-        @SerializedName("a")
-        public String alias;
+    public String status;
 
-        @SerializedName("c")
-        public JsonObject categories= new JsonObject();
+    public String title;
 
-        @SerializedName("h")
-        public int hits;
+    public String alias;
 
-        @SerializedName("i")
-        public String id;
+    public Date last_chapter;
 
-        @SerializedName("im")
-        public String image;
-
-        @SerializedName("s")
-        public String status;
-
-        @SerializedName("t")
-        public String title;
-
-        private class Category {
-            String category;
+    public Manga(String title, String status, String hits, String id, String image, String alias,ArrayList<String> categories,Date last_chapter){
+        this.title = title;
+        if(status.equals("0")){
+            this.status = "Suspended";
         }
-    }
+        else if(this.status.equals("1")){
+            this.status = "OnGoing";
+        }
+        else if(this.status.equals("2")){
+            this.status = "Complete";
+        }
+
+        this.id = id;
+        this.hits = hits;
+        this.alias = alias;
+        this.image = image;
+        this.categories = categories;
+        this.last_chapter = last_chapter;
 }
+}
+
