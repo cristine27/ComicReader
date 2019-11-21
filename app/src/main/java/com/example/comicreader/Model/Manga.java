@@ -26,15 +26,15 @@ public class Manga {
 
     public Date last_chapter;
 
-    public Manga(String title, String status, String hits, String id, String image, String alias,ArrayList<String> categories,Date last_chapter){
+    public Manga(String title, String status, String hits, String id, String image, String alias,Date last_chapter){
         this.title = title;
         if(status.equals("0")){
             this.status = "Suspended";
         }
-        else if(this.status.equals("1")){
+        else if(status.equals("1")){
             this.status = "OnGoing";
         }
-        else if(this.status.equals("2")){
+        else if(status.equals("2")){
             this.status = "Complete";
         }
 
@@ -42,7 +42,7 @@ public class Manga {
         this.hits = hits;
         this.alias = alias;
         this.image = image;
-        this.categories = categories;
+//        this.categories = categories;
         this.last_chapter = last_chapter;
 }
 }

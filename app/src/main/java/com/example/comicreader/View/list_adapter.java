@@ -1,19 +1,27 @@
 package com.example.comicreader.View;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.comicreader.Model.Manga;
+import com.example.comicreader.R;
 
 import java.util.ArrayList;
 
 public class list_adapter extends BaseAdapter {
     ArrayList<Manga> manga = new ArrayList<>();
+    Context context;
 
-    public list_adapter(ArrayList<Manga> m){
+    public list_adapter(ArrayList<Manga> m, Context context){
         this.manga = m;
+        this.context=context;
     }
 
     @Override
@@ -33,7 +41,26 @@ public class list_adapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        view = inflater.inflate(R.layout.manga_row, null, true);
 
-        return null;
+        TextView title = view.findViewById(R.id.tv_titleText);
+        TextView lastChapter = view.findViewById(R.id.tv_lastchapterText);
+        TextView status = view.findViewById(R.id.tv_statusText);
+        ImageView poster = view.findViewById(R.id.poster);
+
+        ArrayList<String> categori = new ArrayList<>();
+        Manga mangaList = this.manga.get(i);
+
+        title.setText(mangaList.title);
+        lastChapter.setText((CharSequence) mangaList.last_chapter);
+        status.setText(mangaList.status);
+        if(mangaList.image.equals("null")){
+            Glide.with(context).load(R.drawable.noimage).into(poster);
+        }
+        else{
+            Glide.with(context).load("https://cdn.mangaeden.com/mangasimg/200x/"+mangaList.image).into(poster);
+        }
+        return view;
     }
 }

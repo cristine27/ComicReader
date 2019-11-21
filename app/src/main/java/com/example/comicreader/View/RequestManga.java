@@ -21,42 +21,45 @@ import java.util.Date;
 public class RequestManga {
     protected final String BASE_URL = "https://www.mangaeden.com/api/";
     private Context context;
+    ArrayList<Manga> mangaList = new ArrayList<>();
 
     public RequestManga(Context context) {
         this.context = context;
+        getMangaList();
     }
 
     public void getMangaList() {
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = BASE_URL + "list/0";
-
-        final ArrayList<Manga> mangaList = new ArrayList();
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+        final String url = BASE_URL + "list/0";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                System.out.println("ini apa ? " + response.isNull(url));
                 try {
-                    JSONArray array = response.getJSONArray("manga");
-                    for (int i = 0; i < array.length(); i++) {
-                        JSONObject mangaJSON = array.getJSONObject(i);
+                    JSONArray arrayManga = response.getJSONArray("manga");
+                    for(int i = 0 ; i<arrayManga.length(); i++){
+                        JSONObject mangaJSON = arrayManga.getJSONObject(i);
                         String img = mangaJSON.getString("im");
                         String title = mangaJSON.getString("t");
                         String id = mangaJSON.getString("i");
                         String alias = mangaJSON.getString("a");
                         String status = mangaJSON.getString("s");
                         String hits = mangaJSON.getString("h");
-                        JSONArray category = new JSONArray("c");
-                        ArrayList<String> categories = new ArrayList<>();
-                        for (int j = 0; j < category.length(); j++) {
-                            categories.add(category.get(j).toString());
-                        }
-                        Date last_chapter = null;
-                        if (mangaJSON.has("ld") && mangaJSON.getString("ld") != null) {
+                        Date last_chapter_date = null;
+                        if(mangaJSON.has("ld") && mangaJSON.getString("ld")!= null && !mangaJSON.getString("ld").equals("null")) {
                             double tempdate = Double.parseDouble(mangaJSON.getString("ld"));
-                            long date = (long) tempdate;
-                            last_chapter = new Date(date * 1000);
+                            long date = (long)tempdate;
+                            last_chapter_date = new Date(date*1000);
                         }
-                        Manga newManga = new Manga(title, status, hits, id, img, alias, categories, last_chapter);
-                        mangaList.add(newManga);
+
+//                        JSONArray category = new JSONArray("c");
+//                        ArrayList<String> categories = new ArrayList<>();
+//                        for (int j = 0; j < category.length(); j++) {
+//                            categories.add(category.get(j).toString());
+//                        }
+
+                        Manga manga = new Manga(title,status,hits,id,img,alias,last_chapter_date);
+                        mangaList.add(manga);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -65,11 +68,14 @@ public class RequestManga {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("ERROR", "error boss.. try again");
+                Log.d("ERROR","");
             }
         });
         queue.add(jsonObjectRequest);
+
     }
+
+
 
 //    public void getMangaInfo(String id){
 //        RequestQueue queue = Volley.newRequestQueue(context);
