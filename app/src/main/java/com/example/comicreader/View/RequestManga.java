@@ -8,6 +8,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.comicreader.Model.Manga;
 
@@ -29,49 +30,48 @@ public class RequestManga {
     }
 
     public void getMangaList() {
-        RequestQueue queue = Volley.newRequestQueue(context);
-        final String url = BASE_URL + "list/0";
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                System.out.println("ini apa ? " + response.isNull(url));
-                try {
-                    JSONArray arrayManga = response.getJSONArray("manga");
-                    for(int i = 0 ; i<arrayManga.length(); i++){
-                        JSONObject mangaJSON = arrayManga.getJSONObject(i);
-                        String img = mangaJSON.getString("im");
-                        String title = mangaJSON.getString("t");
-                        String id = mangaJSON.getString("i");
-                        String alias = mangaJSON.getString("a");
-                        String status = mangaJSON.getString("s");
-                        String hits = mangaJSON.getString("h");
-                        Date last_chapter_date = null;
-                        if(mangaJSON.has("ld") && mangaJSON.getString("ld")!= null && !mangaJSON.getString("ld").equals("null")) {
-                            double tempdate = Double.parseDouble(mangaJSON.getString("ld"));
-                            long date = (long)tempdate;
-                            last_chapter_date = new Date(date*1000);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, BASE_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            JSONArray mangalist = obj.getJSONArray("manga");
+
+                            for (int i = 0; i < mangalist.length(); i++) {
+
+                                JSONObject mangaReader = mangalist.getJSONObject(i);
+
+
+                                Manga manga = new Manga(mangaReader.getString("t"),
+                                        mangaReader.getString("s"),
+                                        mangaReader.getString("h"),
+                                        mangaReader.getString("i"),
+                                        mangaReader.getString("im"),
+                                        mangaReader.getString("a"),
+                                        mangaReader.getString("ld"));
+
+                                mangaList.add(manga);
+                            }
+
+                            list_adapter adapter = new list_adapter(mangaList, context);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-
-//                        JSONArray category = new JSONArray("c");
-//                        ArrayList<String> categories = new ArrayList<>();
-//                        for (int j = 0; j < category.length(); j++) {
-//                            categories.add(category.get(j).toString());
-//                        }
-
-                        Manga manga = new Manga(title,status,hits,id,img,alias,last_chapter_date);
-                        mangaList.add(manga);
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("ERROR","");
-            }
-        });
-        queue.add(jsonObjectRequest);
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println("error");
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this.context);
+        requestQueue.add(stringRequest);
 
     }
 

@@ -24,9 +24,9 @@ public class Manga {
 
     public String alias;
 
-    public Date last_chapter;
+    public String last_chapter;
 
-    public Manga(String title, String status, String hits, String id, String image, String alias,Date last_chapter){
+    public Manga(String title, String status, String hits, String id, String image, String alias,String last_chapter){
         this.title = title;
         if(status.equals("0")){
             this.status = "Suspended";
