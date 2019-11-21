@@ -26,23 +26,23 @@ public class MainActivity extends AppCompatActivity implements InterfaceManga {
     protected List_fragment list_fragment;
     protected RequestManga requestManga;
     protected FragmentManager fm;
-
+    protected ArrayList<Manga> mangaList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        this.list_fragment = new List_fragment();
-        this.requestManga = new RequestManga(this);
+        this.mangaList = new ArrayList<>();
+        this.requestManga = new RequestManga(this,this);
+        this.list_fragment = List_fragment.createHomeScreen(this,this.mangaList);
 
         this.fm = this.getSupportFragmentManager();
         FragmentTransaction ft =this.fm.beginTransaction();
         ft.add(R.id.frame_container, this.list_fragment).commit();
     }
 
-    @Override
-    public void getMangaList(ArrayList<Manga> manga) {
-        this.list_fragment.setMangaList(manga);
-    }
+//    @Override
+//    public void getMangaList(ArrayList<Manga> manga) {
+//        this.list_fragment.createManga(manga);
+//    }
 }

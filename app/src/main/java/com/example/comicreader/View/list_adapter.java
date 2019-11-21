@@ -26,7 +26,7 @@ public class list_adapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return manga.size();
     }
 
     @Override
@@ -52,14 +52,14 @@ public class list_adapter extends BaseAdapter {
         ArrayList<String> categori = new ArrayList<>();
         Manga mangaList = this.manga.get(i);
 
-        title.setText(mangaList.title);
-        lastChapter.setText((CharSequence) mangaList.last_chapter);
-        status.setText(mangaList.status);
-        if(mangaList.image.equals("null")){
+        title.setText(mangaList.getTitle());
+//        lastChapter.setText((CharSequence) mangaList.get);
+        status.setText(mangaList.getStatus());
+        if(mangaList.getImage().equals("null")){
             Glide.with(context).load(R.drawable.noimage).into(poster);
         }
         else{
-            Glide.with(context).load("https://cdn.mangaeden.com/mangasimg/200x/"+mangaList.image).into(poster);
+            Glide.with(context).load("https://cdn.mangaeden.com/mangasimg/200x/"+mangaList.getImage()).into(poster);
         }
         return view;
     }

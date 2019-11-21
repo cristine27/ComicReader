@@ -9,41 +9,102 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Manga {
+    private String id;
+    private String title;
+    private String alias;
+    private String category;
+    private String status;
+    private String image;
+    private String rating;
+    private String summary;
+    private String author;
 
-    public ArrayList<String> categories;
-
-    public String hits;
-
-    public String id;
-
-    public String image;
-
-    public String status;
-
-    public String title;
-
-    public String alias;
-
-    public String last_chapter;
-
-    public Manga(String title, String status, String hits, String id, String image, String alias,String last_chapter){
-        this.title = title;
-        if(status.equals("0")){
-            this.status = "Suspended";
-        }
-        else if(status.equals("1")){
-            this.status = "OnGoing";
-        }
-        else if(status.equals("2")){
-            this.status = "Complete";
-        }
-
+    public Manga(String id, String title, String alias, String category, String status, String rating, String image) {
         this.id = id;
-        this.hits = hits;
+        this.title = title;
         this.alias = alias;
+        this.category = category;
+        this.status = status;
+        this.rating = rating;
         this.image = image;
-//        this.categories = categories;
-        this.last_chapter = last_chapter;
+        this.summary = "";
+        this.author = "";
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public String getCategory() {
+        if(this.category.equals("[]")){
+            return "-";
+        }
+        else{
+            String category="";
+            for (int i = 0 ; i < this.category.length() ; i++){
+                if(this.category.charAt(i)=='['||this.category.charAt(i)==']'||this.category.charAt(i)=='"'){
+                    continue;
+                }
+                else if(this.category.charAt(i)==','){
+                    category+=this.category.charAt(i)+" ";
+                }
+                else{
+                    category+=this.category.charAt(i);
+                }
+            }
+            return category;
+        }
+    }
+
+    public String getStatus() {
+        if(this.status.equals("0")){
+            return "Suspended";
+        }
+        else if(this.status.equals("1")) {
+            return "Ongoing";
+        }
+        else{
+            return "Complete";
+        }
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setSummary(String summary){
+        this.summary = summary;
+    }
+
+    public String getSummary(){
+        if(summary.equals("")){
+            return "-";
+        }
+        return summary;
+    }
+
+    public void setAuthor(String author){
+        this.author = author;
+    }
+
+    public String getAuthor(){
+        if(this.author.equals("")){
+            return "-";
+        }
+        return this.author;
+    }
 }
-}
+
 
