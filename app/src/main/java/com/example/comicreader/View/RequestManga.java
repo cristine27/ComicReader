@@ -40,12 +40,8 @@ public class RequestManga {
                         try {
                             JSONObject obj = new JSONObject(response);
                             JSONArray mangalist = obj.getJSONArray("manga");
-
                             for (int i = 0; i < mangalist.length(); i++) {
-
                                 JSONObject mangaReader = mangalist.getJSONObject(i);
-
-
                                 Manga manga = new Manga(mangaReader.getString("i"),
                                         mangaReader.getString("t"),
                                         mangaReader.getString("a"),

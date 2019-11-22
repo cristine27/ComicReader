@@ -10,7 +10,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/my_list"/>
-
-    <include layout="@layout/search_layout" android:id="@+id/search_bar"/>
-
 </FrameLayout>

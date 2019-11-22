@@ -5,10 +5,14 @@
     android:layout_height="match_parent"
     tools:context=".View.info_fragment">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/realtif">
+        android:id="@+id/realtif"
+        android:layout_marginLeft="10dp">
 
         <ImageView
             android:layout_width="150dp"
@@ -47,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_descinfotext"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:layout_below="@id/tv_descinfo"
             android:layout_marginTop="5dp"
             android:scrollbars="vertical"/>
@@ -70,23 +74,22 @@
             android:layout_toRightOf="@id/tv_chapterinfo"
             android:layout_below="@id/tv_descinfotext" />
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="400dp">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:orientation="vertical"
-                android:id="@+id/linear">
+                android:id="@+id/linear"
+                android:layout_below="@id/tv_chapterinfotext">
 
                 <ListView
                     android:id="@+id/list_chapter"
                     android:layout_width="match_parent"
                     android:layout_height="300dp" />
             </LinearLayout>
-        </ScrollView>
     </RelativeLayout>
+
+    </ScrollView>
 
 </FrameLayout>
