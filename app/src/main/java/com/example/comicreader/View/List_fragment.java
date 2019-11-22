@@ -121,7 +121,7 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemClick(AdapterView<?> parent, View view, final int position, final long id) {
         System.out.println("position " + position);
         final int pos = position;
         final Manga mangaClick = mangaList.get(position);
@@ -139,10 +139,13 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
                     String deskripsi = obj.getString("description");
                     String author = obj.getString("author");
                     String chapter_length = obj.getString("chapters_len");
+                    
                     mangaClick.setAuthor(author);
                     mangaClick.setSummary(deskripsi);
                     mangaClick.setChapter_length(chapter_length);
-                    MangaInfo(mangaClick,pos,2);
+                    presenter.setManga(mangaClick);
+                    presenter.setPosition(position);
+                    sendPage(2);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -157,10 +160,11 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
         requestQueue.add(stringRequest);
     }
 
-    public void MangaInfo(Manga manga, int position,int id){
-        System.out.println("HALOOO");
-        System.out.println("cuupu"+manga.getTitle());
-        this.presenter.sendMangaInfo(manga,position);
+    public void MangaInfo(){
+        this.presenter.sendMangaInfo();
+    }
+
+    public void sendPage(int id){
         this.presenter.changePage(id);
     }
 }

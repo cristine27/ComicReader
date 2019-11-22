@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,7 @@ public class info_fragment extends Fragment {
     private Context context;
     private ArrayList<Manga> mangaList;
     private Manga mangaClick;
+    private int position;
     ImageView poster;
     TextView title;
     TextView description;
@@ -65,17 +67,23 @@ public class info_fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_info_fragment, container, false);
+
+        this.mangaClick = presenter.getManga();
+        this.position = presenter.getPosition();
+
         this.poster = view.findViewById(R.id.iv_posterInfo);
         this.title = view.findViewById(R.id.tv_infotitletext);
         this.description = view.findViewById(R.id.tv_descinfotext);
+        this.description.setMovementMethod(new ScrollingMovementMethod());
         this.chapter_length = view.findViewById(R.id.tv_chapterinfotext);
+
+        this.cretePage(mangaClick,position);
 
         return view;
     }
 
     public void cretePage(Manga manga,int position){
         mangaClick = manga;
-        System.out.println("isi manga " + manga.getTitle());
         if(!manga.getImage().equals("null")){
             Glide.with(this).load("https://cdn.mangaeden.com/mangasimg/200x/" + manga.getImage()).into(poster);
         }
@@ -86,5 +94,9 @@ public class info_fragment extends Fragment {
         title.setText(manga.getTitle());
         description.setText(manga.getSummary());
         chapter_length.setText(manga.getChapter_length());
+    }
+
+    public void getChapterList(){
+
     }
 }

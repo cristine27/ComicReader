@@ -7,7 +7,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/realtif">
 
         <ImageView
             android:layout_width="150dp"
@@ -22,14 +23,14 @@
             android:id="@+id/tv_infotitle"
             android:text="Title :"
             android:layout_below="@id/iv_posterInfo"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:layout_marginRight="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_infotitletext"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:layout_below="@id/iv_posterInfo"
             android:layout_toRightOf="@id/tv_infotitle"/>
 
@@ -38,7 +39,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tv_descinfo"
             android:text="Description :"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:layout_below="@id/tv_infotitle"
             android:layout_marginTop="5dp"/>
 
@@ -48,13 +49,14 @@
             android:id="@+id/tv_descinfotext"
             android:textSize="25dp"
             android:layout_below="@id/tv_descinfo"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="5dp"
+            android:scrollbars="vertical"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_chapterinfo"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:text="Chapter Length :"
             android:layout_below="@id/tv_descinfotext"
             android:layout_marginTop="5dp"
@@ -64,11 +66,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_chapterinfotext"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:layout_toRightOf="@id/tv_chapterinfo"
             android:layout_below="@id/tv_descinfotext" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="400dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:orientation="vertical"
+                android:id="@+id/linear">
+
+                <ListView
+                    android:id="@+id/list_chapter"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp" />
+            </LinearLayout>
+        </ScrollView>
     </RelativeLayout>
-
-
 
 </FrameLayout>
