@@ -17,7 +17,7 @@
         android:layout_toRightOf="@id/poster"
         android:text="Title"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="15sp"/>
+        android:textSize="10sp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,51 +25,34 @@
         android:id="@+id/tv_titleText"
         android:layout_below="@id/tv_title"
         android:layout_toRightOf="@id/poster"
-        android:textSize="15sp"/>
+        android:textSize="10sp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"
         android:id="@+id/tv_category"
         android:layout_toRightOf="@id/poster"
         android:layout_below="@id/tv_titleText"
         android:text="category"
-        android:textSize="25sp"/>
+        android:textSize="10sp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_categoryText"
-        android:textColor="@color/colorPrimaryDark"
         android:layout_below="@id/tv_category"
         android:layout_toRightOf="@id/poster"
-        android:textSize="25sp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_lastchapter"
-        android:layout_toRightOf="@id/poster"
-        android:layout_below="@id/tv_categoryText"
-        android:text="last chapter"
-        android:textSize="25sp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_lastchapterText"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_below="@id/tv_lastchapter"
-        android:layout_toRightOf="@id/poster"
-        android:textSize="25sp"/>
+        android:textSize="10sp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_status"
-        android:layout_below="@id/tv_lastchapterText"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_below="@id/tv_categoryText"
         android:layout_toRightOf="@id/poster"
-        android:textSize="25sp"
+        android:textSize="10sp"
         android:text="Status"/>
 
     <TextView
@@ -78,5 +61,5 @@
         android:id="@+id/tv_statusText"
         android:layout_below="@id/tv_status"
         android:layout_toRightOf="@id/poster"
-        android:textSize="25sp"/>
+        android:textSize="10sp"/>
 </RelativeLayout>

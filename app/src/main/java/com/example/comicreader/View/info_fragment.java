@@ -1,4 +1,4 @@
-package com.example.comicreader;
+package com.example.comicreader.View;
 
 
 import android.content.Context;
@@ -18,6 +18,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.comicreader.Model.Manga;
+import com.example.comicreader.Presenter.Presenter;
+import com.example.comicreader.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,6 +32,7 @@ import java.util.ArrayList;
  */
 public class info_fragment extends Fragment {
     private static info_fragment info_fragment;
+    private Presenter presenter;
     private static final String BASE_URL = "https://www.mangaeden.com/api/manga/";
     private Context context;
     private ArrayList<Manga> mangaList;
@@ -39,11 +42,12 @@ public class info_fragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static info_fragment createInfoScreen(Context context, ArrayList<Manga> mangaList){
+    public static info_fragment createInfoScreen(Context context, ArrayList<Manga> mangaList, Presenter presenter){
         if(info_fragment==null){
             info_fragment = new info_fragment();
             info_fragment.context = context;
             info_fragment.mangaList = (ArrayList<Manga>)mangaList;
+            info_fragment.presenter = presenter;
         }
         return info_fragment;
     }
@@ -58,34 +62,7 @@ public class info_fragment extends Fragment {
         return view;
     }
 
-    public void getMangaInfo(){
-        String idManga = mangaClick.getId();
-        String url = BASE_URL+idManga+"/";
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    Log.d("TEST","MASUK KLIK MANGA");
-                    JSONObject obj = new JSONObject(response);
-                    String deskripsi = obj.getString("description");
-                    String author = obj.getString("description");
-
-                    mangaClick.setAuthor(author);
-                    mangaClick.setSummary(deskripsi);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("TEST","GAGAL.. TRY AGAIN");
-            }
-        });
-        RequestQueue requestQueue = Volley.newRequestQueue(this.context);
-        requestQueue.add(stringRequest);
-
-
+    public void cretePage(Manga manga,int position){
+        
     }
 }

@@ -22,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.comicreader.Model.Manga;
+import com.example.comicreader.Presenter.Presenter;
 import com.example.comicreader.R;
 
 import org.json.JSONArray;
@@ -38,37 +39,27 @@ import java.util.List;
 public class List_fragment extends Fragment implements AdapterView.OnItemClickListener {
     FragmentManager manager;
     FragmentTransaction ft;
-//    RequestManga requestManga;
+    public Presenter presenter;
     private static List_fragment listFragment;
     private Context context;
     private ListView lvManga;
     private static final String JSON_URL = "https://www.mangaeden.com/api/list/0/";
-    private ArrayList<Manga> mangaList;
+    public ArrayList<Manga> mangaList;
 
     public List_fragment() {
         // Required empty public constructor
     }
 
-    public static List_fragment createHomeScreen(Context context, ArrayList<Manga> mangaList){
+    public static List_fragment createHomeScreen(Context context, ArrayList<Manga> mangaList,Presenter presenter){
         if(listFragment==null){
             listFragment = new List_fragment();
             listFragment.context = context;
             listFragment.mangaList = (ArrayList<Manga>) mangaList.clone();
+            listFragment.presenter = presenter;
         }
         return listFragment;
     }
 
-//    public static List_fragment newInstance(String title,RequestManga requestManga){
-//        List_fragment list = new List_fragment();
-//        Bundle args = new Bundle();
-//        args.putString("title",title);
-//        list.setRequestManga(requestManga);
-//        return list;
-//    }
-
-//    public void setRequestManga(RequestManga req){
-//        this.requestManga = req;
-//    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -131,10 +122,9 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        final Manga mangaKlik = this.mangaList.get(position);
-        String BASE_URL = "https://www.mangaeden.com/api/manga/";
-        String idManga = mangaKlik.getId();
-        String url = BASE_URL+idManga+"/";
+        final Manga mangaClick = this.mangaList.get(position);
+        String idManga = mangaClick.getId();
+        String url = "https://www.mangaeden.com/api/manga/"+idManga+"/";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -143,10 +133,10 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
                     Log.d("TEST","MASUK KLIK MANGA");
                     JSONObject obj = new JSONObject(response);
                     String deskripsi = obj.getString("description");
-                    String author = obj.getString("description");
+                    String author = obj.getString("author");
 
-                    mangaKlik.setAuthor(author);
-                    mangaKlik.setSummary(deskripsi);
+                    mangaClick.setAuthor(author);
+                    mangaClick.setSummary(deskripsi);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -160,6 +150,11 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
         RequestQueue requestQueue = Volley.newRequestQueue(this.context);
         requestQueue.add(stringRequest);
 
+        this.MangaInfo(mangaClick,position,2);
+    }
 
+    public void MangaInfo(Manga manga, int position,int id){
+        this.presenter.sendMangaInfo(manga,position);
+        this.presenter.changePage(id);
     }
 }
