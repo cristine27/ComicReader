@@ -17,7 +17,7 @@
         android:layout_toRightOf="@id/poster"
         android:text="Title"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="10sp"/>
+        android:textSize="20dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,7 +25,7 @@
         android:id="@+id/tv_titleText"
         android:layout_below="@id/tv_title"
         android:layout_toRightOf="@id/poster"
-        android:textSize="10sp"/>
+        android:textSize="20sp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -34,8 +34,8 @@
         android:id="@+id/tv_category"
         android:layout_toRightOf="@id/poster"
         android:layout_below="@id/tv_titleText"
-        android:text="category"
-        android:textSize="10sp"/>
+        android:text="Category"
+        android:textSize="20sp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
         android:id="@+id/tv_categoryText"
         android:layout_below="@id/tv_category"
         android:layout_toRightOf="@id/poster"
-        android:textSize="10sp"/>
+        android:textSize="20sp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
         android:textColor="@color/colorPrimaryDark"
         android:layout_below="@id/tv_categoryText"
         android:layout_toRightOf="@id/poster"
-        android:textSize="10sp"
+        android:textSize="20sp"
         android:text="Status"/>
 
     <TextView
@@ -61,5 +61,5 @@
         android:id="@+id/tv_statusText"
         android:layout_below="@id/tv_status"
         android:layout_toRightOf="@id/poster"
-        android:textSize="10sp"/>
+        android:textSize="20sp"/>
 </RelativeLayout>
