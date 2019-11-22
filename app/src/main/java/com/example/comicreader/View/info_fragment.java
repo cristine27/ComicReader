@@ -122,12 +122,17 @@ public class info_fragment extends Fragment implements AdapterView.OnItemClickLi
             @Override
             public void onResponse(String response) {
                 try {
+                    System.out.println("response gambar masuk");
                     JSONObject obj = new JSONObject(response);
                     JSONArray imgURL = obj.getJSONArray("images");
-                    ArrayList<String> kumpulanImage = new ArrayList<>();
 
-                    for (int i = imgURL.length() - 1; i <= 0; i--) {
-                        String temp = imgURL.getString(i);
+                    ArrayList<String> kumpulanImage = new ArrayList<>();
+                    System.out.println("ukuran response " + kumpulanImage.size());
+                    for (int i = imgURL.length() - 1; i >= 0; i--) {
+                        JSONArray t = imgURL.getJSONArray(i);
+                        String temp = t.getString(1);
+
+                        System.out.println("isi response gambar "+ temp);
                         kumpulanImage.add(temp);
                     }
                     presenter.setKumpulanImg(kumpulanImage);

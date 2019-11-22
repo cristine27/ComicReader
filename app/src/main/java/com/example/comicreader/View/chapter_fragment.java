@@ -16,7 +16,6 @@ import com.example.comicreader.Presenter.Presenter;
 import com.example.comicreader.R;
 
 import java.util.ArrayList;
-
 public class chapter_fragment extends Fragment implements View.OnClickListener{
     private static chapter_fragment chapter_fragment;
     private Presenter presenter;
@@ -55,6 +54,7 @@ public class chapter_fragment extends Fragment implements View.OnClickListener{
         this.back = view.findViewById(R.id.b_back_dariChapter);
         this.back.setOnClickListener(this);
 
+        System.out.println("ukuran img " + this.kumpulanImg.size());
         this.adapter = new img_adapter(this.kumpulanImg,context);
         this.lv_list_chapter.setAdapter(this.adapter);
 
