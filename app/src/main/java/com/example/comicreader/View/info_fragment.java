@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -39,7 +41,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class info_fragment extends Fragment implements AdapterView.OnItemClickListener {
+public class info_fragment extends Fragment implements AdapterView.OnItemClickListener,View.OnClickListener {
     private static info_fragment info_fragment;
     private static final String BASE_URL = "https://www.mangaeden.com/api/manga/";
     private Presenter presenter;
@@ -53,6 +55,7 @@ public class info_fragment extends Fragment implements AdapterView.OnItemClickLi
     TextView description;
     TextView chapter_length;
     ListView lv_list_chap;
+    Button back;
 
     public info_fragment() {
         // Required empty public constructor
@@ -84,6 +87,8 @@ public class info_fragment extends Fragment implements AdapterView.OnItemClickLi
         this.description.setMovementMethod(new ScrollingMovementMethod());
         this.chapter_length = view.findViewById(R.id.tv_chapterinfotext);
         this.lv_list_chap = view.findViewById(R.id.list_chapter);
+        this.back = view.findViewById(R.id.b_back_dariInfo);
+        this.back.setOnClickListener(this);
 
         chapter_adapter adapter = new chapter_adapter(this.chapters,context);
 
@@ -139,5 +144,18 @@ public class info_fragment extends Fragment implements AdapterView.OnItemClickLi
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this.context);
         requestQueue.add(stringRequest);
+    }
+    public void onClick(View view) {
+//        switch (view.getId()){
+//            case (R.id.ib_back_dariInfo):
+//                presenter.changePage(1);
+//                System.out.println("pindah ke halaman utama");
+//                break;
+//        }
+
+        if(view.getId() == this.back.getId()){
+            presenter.changePage(1);
+            System.out.println("pindah ke halaman utama");
+        }
     }
 }

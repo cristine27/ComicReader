@@ -3,13 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:id="@+id/b_back_dariChapter"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_chapter"
         android:text="Chapter : "
-        android:textSize="25dp"/>
+        android:textSize="25dp"
+        android:layout_centerHorizontal="true"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,11 +33,5 @@
         android:layout_below="@id/tv_chapter">
     </ListView>
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/ic_arrow_back"
-        android:background="@color/white"
-        android:padding="10dp"/>
+
 </RelativeLayout>
