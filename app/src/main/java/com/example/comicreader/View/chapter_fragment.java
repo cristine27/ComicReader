@@ -50,7 +50,7 @@ public class chapter_fragment extends Fragment {
         this.tv_chapter = view.findViewById(R.id.tv_chapter);
         this.tv_chapterText = view.findViewById(R.id.tv_chapterText);
         this.lv_list_chapter = view.findViewById(R.id.lv_list_chapter);
-
+        System.out.println("ukuran img " + this.kumpulanImg.size());
         this.adapter = new img_adapter(this.kumpulanImg,context);
         this.lv_list_chapter.setAdapter(this.adapter);
 
