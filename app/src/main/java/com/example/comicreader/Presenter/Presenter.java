@@ -15,6 +15,7 @@ public class Presenter {
     }
 
     public void sendMangaInfo(Manga mangaClick,int position){
+        System.out.println("Send berhasil");
         this.interfaceManga.getMangaid(mangaClick,position);
     }
 

@@ -18,6 +18,7 @@ public class Manga {
     private String rating;
     private String summary;
     private String author;
+    private String chapter_length;
 
     public Manga(String id, String title, String alias, String category, String status, String rating, String image) {
         this.id = id;
@@ -29,6 +30,7 @@ public class Manga {
         this.image = image;
         this.summary = "";
         this.author = "";
+        this.chapter_length = "";
     }
 
     public String getId() {
@@ -104,6 +106,19 @@ public class Manga {
             return "-";
         }
         return this.author;
+    }
+
+    public void setChapter_length(String chapter_length) {
+        this.chapter_length = chapter_length;
+    }
+
+    public String getChapter_length() {
+        if(this.chapter_length.equals("")){
+            return "0";
+        }
+        else{
+            return chapter_length;
+        }
     }
 }
 

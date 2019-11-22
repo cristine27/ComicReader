@@ -45,7 +45,6 @@ public class list_adapter extends BaseAdapter {
         view = inflater.inflate(R.layout.manga_row, null, true);
 
         TextView title = view.findViewById(R.id.tv_titleText);
-        TextView lastChapter = view.findViewById(R.id.tv_lastchapterText);
         TextView status = view.findViewById(R.id.tv_statusText);
         ImageView poster = view.findViewById(R.id.poster);
 
@@ -53,7 +52,6 @@ public class list_adapter extends BaseAdapter {
         Manga mangaList = this.manga.get(i);
 
         title.setText(mangaList.getTitle());
-//        lastChapter.setText((CharSequence) mangaList.get);
         status.setText(mangaList.getStatus());
         if(mangaList.getImage().equals("null")){
             Glide.with(context).load(R.drawable.noimage).into(poster);

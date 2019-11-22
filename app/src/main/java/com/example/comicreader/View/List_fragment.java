@@ -29,6 +29,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +76,6 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
 
 
     public void getMangaList() {
-        final ArrayList<Manga> mangaList = new ArrayList();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL,
                 new Response.Listener<String>() {
 
@@ -101,7 +101,7 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
                                 Log.d("TEST PRINT", manga.getTitle().toString());
                                 mangaList.add(manga);
                             }
-
+                            System.out.println("SIZE "+mangaList.size());
                             list_adapter adapter = new list_adapter(mangaList,context);
                             lvManga.setAdapter(adapter);
 //                            sendList(mangaList);
@@ -122,21 +122,27 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        final Manga mangaClick = this.mangaList.get(position);
+        System.out.println("position " + position);
+        final int pos = position;
+        final Manga mangaClick = mangaList.get(position);
+        System.out.println("judul " + mangaList.get(position).getTitle());
         String idManga = mangaClick.getId();
+        System.out.println("idKlik "+ idManga);
         String url = "https://www.mangaeden.com/api/manga/"+idManga+"/";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
-                    Log.d("TEST","MASUK KLIK MANGA");
+                    Log.d("KLIK","MASUK KLIK MANGA");
                     JSONObject obj = new JSONObject(response);
                     String deskripsi = obj.getString("description");
                     String author = obj.getString("author");
-
+                    String chapter_length = obj.getString("chapters_len");
                     mangaClick.setAuthor(author);
                     mangaClick.setSummary(deskripsi);
+                    mangaClick.setChapter_length(chapter_length);
+                    MangaInfo(mangaClick,pos,2);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -144,16 +150,16 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("TEST","GAGAL.. TRY AGAIN");
+                Log.d("KLIK","GAGAL.. TRY AGAIN");
             }
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this.context);
         requestQueue.add(stringRequest);
-
-        this.MangaInfo(mangaClick,position,2);
     }
 
     public void MangaInfo(Manga manga, int position,int id){
+        System.out.println("HALOOO");
+        System.out.println("cuupu"+manga.getTitle());
         this.presenter.sendMangaInfo(manga,position);
         this.presenter.changePage(id);
     }

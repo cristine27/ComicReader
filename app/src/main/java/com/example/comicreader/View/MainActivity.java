@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceManga {
 
     @Override
     public void getMangaid(Manga manga, int position) {
+        System.out.println("create page berhasil ");
         this.info_fragment.cretePage(manga,position);
     }
 
