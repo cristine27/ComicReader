@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,8 +16,7 @@ import com.example.comicreader.Presenter.Presenter;
 import com.example.comicreader.R;
 
 import java.util.ArrayList;
-
-public class chapter_fragment extends Fragment {
+public class chapter_fragment extends Fragment implements View.OnClickListener{
     private static chapter_fragment chapter_fragment;
     private Presenter presenter;
     private Context context;
@@ -25,6 +25,7 @@ public class chapter_fragment extends Fragment {
     private ArrayList<String> kumpulanImg;
     private TextView tv_chapter,tv_chapterText;
     private ListView lv_list_chapter;
+    private Button back;
 
     public static chapter_fragment createChapterScreen(Context context,ArrayList<Manga> mangalist, Presenter presenter){
         if(chapter_fragment == null){
@@ -50,6 +51,9 @@ public class chapter_fragment extends Fragment {
         this.tv_chapter = view.findViewById(R.id.tv_chapter);
         this.tv_chapterText = view.findViewById(R.id.tv_chapterText);
         this.lv_list_chapter = view.findViewById(R.id.lv_list_chapter);
+        this.back = view.findViewById(R.id.b_back_dariChapter);
+        this.back.setOnClickListener(this);
+
         System.out.println("ukuran img " + this.kumpulanImg.size());
         this.adapter = new img_adapter(this.kumpulanImg,context);
         this.lv_list_chapter.setAdapter(this.adapter);
@@ -57,4 +61,12 @@ public class chapter_fragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.b_back_dariChapter:
+                presenter.changePage(2);
+                break;
+        }
+    }
 }
