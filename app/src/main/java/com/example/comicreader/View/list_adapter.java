@@ -46,6 +46,7 @@ public class list_adapter extends BaseAdapter {
 
         TextView title = view.findViewById(R.id.tv_titleText);
         TextView status = view.findViewById(R.id.tv_statusText);
+        TextView category = view.findViewById(R.id.tv_categoryText);
         ImageView poster = view.findViewById(R.id.poster);
 
         ArrayList<String> categori = new ArrayList<>();
@@ -53,6 +54,7 @@ public class list_adapter extends BaseAdapter {
 
         title.setText(mangaList.getTitle());
         status.setText(mangaList.getStatus());
+        category.setText(mangaList.getCategory());
         if(mangaList.getImage().equals("null")){
             Glide.with(context).load(R.drawable.noimage).into(poster);
         }
