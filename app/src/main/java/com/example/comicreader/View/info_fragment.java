@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ import com.example.comicreader.Model.Manga;
 import com.example.comicreader.Presenter.Presenter;
 import com.example.comicreader.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
@@ -37,7 +39,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class info_fragment extends Fragment {
+public class info_fragment extends Fragment implements AdapterView.OnItemClickListener {
     private static info_fragment info_fragment;
     private static final String BASE_URL = "https://www.mangaeden.com/api/manga/";
     private Presenter presenter;
@@ -87,6 +89,9 @@ public class info_fragment extends Fragment {
 
         this.cretePage(mangaClick,position);
         this.lv_list_chap.setAdapter(adapter);
+
+        this.lv_list_chap.setOnItemClickListener(this);
+
         return view;
     }
 
@@ -102,5 +107,37 @@ public class info_fragment extends Fragment {
         title.setText(manga.getTitle());
         description.setText(manga.getSummary());
         chapter_length.setText(manga.getChapter_length());
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        final Chapter nowChap = chapters.get(position);
+        String url = "https://www.mangaeden.com/api/chapter/"+ nowChap.getId()+"/";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject obj = new JSONObject(response);
+                    JSONArray imgURL = obj.getJSONArray("images");
+                    ArrayList<String> kumpulanImage = new ArrayList<>();
+
+                    for (int i = imgURL.length() - 1; i <= 0; i--) {
+                        String temp = imgURL.getString(i);
+                        kumpulanImage.add(temp);
+                    }
+                    presenter.setKumpulanImg(kumpulanImage);
+                    presenter.changePage(3);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("ChapterKlik","GAGAL BRO");
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(this.context);
+        requestQueue.add(stringRequest);
     }
 }

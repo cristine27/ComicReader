@@ -15,11 +15,13 @@ public class Presenter {
     private int position;
     private boolean temp;
     private ArrayList<Chapter> chap;
+    private ArrayList<String> kumpulanImg;
 
     public Presenter(InterfaceManga interfaceManga, Context context){
         this.interfaceManga = interfaceManga;
         this.context = context;
         this.chap = new ArrayList<>();
+        this.kumpulanImg = new ArrayList<>();
     }
 
     public void sendMangaInfo(){
@@ -60,5 +62,13 @@ public class Presenter {
 
     public ArrayList<Chapter> getChap() {
         return chap;
+    }
+
+    public ArrayList<String> getKumpulanImg() {
+        return kumpulanImg;
+    }
+
+    public void setKumpulanImg(ArrayList<String> kumpulanImg) {
+        this.kumpulanImg = kumpulanImg;
     }
 }

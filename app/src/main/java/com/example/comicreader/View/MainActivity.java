@@ -26,7 +26,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity implements InterfaceManga {
     protected List_fragment list_fragment;
     protected info_fragment info_fragment;
-    protected RequestManga requestManga;
+    protected chapter_fragment chapter_fragment;
     protected FragmentManager fm;
     protected ArrayList<Manga> mangaList;
     protected Presenter presenter;
@@ -37,9 +37,10 @@ public class MainActivity extends AppCompatActivity implements InterfaceManga {
         setContentView(R.layout.activity_main);
         this.presenter = new Presenter(this,this);
         this.mangaList = new ArrayList<>();
-        this.requestManga = new RequestManga(this,this);
+
         this.list_fragment = List_fragment.createHomeScreen(this,this.mangaList,presenter);
         this.info_fragment = info_fragment.createInfoScreen(this,this.mangaList,presenter);
+        this.chapter_fragment = chapter_fragment.createChapterScreen(this,this.mangaList,presenter);
         this.fm = this.getSupportFragmentManager();
         FragmentTransaction ft =this.fm.beginTransaction();
         ft.add(R.id.frame_container, this.list_fragment).commit();
@@ -68,6 +69,21 @@ public class MainActivity extends AppCompatActivity implements InterfaceManga {
                 ft.add(R.id.frame_container,this.info_fragment);
             }
 
+            if(this.list_fragment.isAdded()){
+                ft.hide(this.list_fragment);
+            }
+        }
+        else if(id==3){
+            if(this.chapter_fragment.isAdded()){
+                ft.show(this.chapter_fragment);
+            }
+            else{
+                ft.add(R.id.frame_container,this.chapter_fragment);
+            }
+
+            if(this.info_fragment.isAdded()){
+                ft.hide(this.info_fragment);
+            }
             if(this.list_fragment.isAdded()){
                 ft.hide(this.list_fragment);
             }
