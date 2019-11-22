@@ -72,6 +72,9 @@ public class MainActivity extends AppCompatActivity implements InterfaceManga {
             if(this.list_fragment.isAdded()){
                 ft.hide(this.list_fragment);
             }
+            if(this.chapter_fragment.isAdded()){
+                ft.hide(this.chapter_fragment);
+            }
         }
         else if(id==3){
             if(this.chapter_fragment.isAdded()){
