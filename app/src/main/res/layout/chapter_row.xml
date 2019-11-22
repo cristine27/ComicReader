@@ -8,7 +8,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/tv_chaptertitle"
         android:textSize="20dp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginLeft="10dp"
+        android:text="Chapter"/>
 
     <TextView
         android:layout_width="wrap_content"

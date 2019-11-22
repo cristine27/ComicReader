@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.comicreader.Model.Chapter;
 import com.example.comicreader.Model.Manga;
 import com.example.comicreader.Presenter.Presenter;
 import com.example.comicreader.R;
@@ -139,12 +140,25 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
                     String deskripsi = obj.getString("description");
                     String author = obj.getString("author");
                     String chapter_length = obj.getString("chapters_len");
-                    
+                    JSONArray arrayChapter = obj.getJSONArray("chapters");
+                    ArrayList<Chapter> arr = new ArrayList<>();
+                    String id = "";
+                    int num = 0;
+                    for (int i = 0; i < arrayChapter.length(); i++) {
+                        JSONArray eachChap = arrayChapter.getJSONArray(i);
+                        id = eachChap.getString(3);
+                        num = eachChap.getInt(0);
+                        Chapter newChap = new Chapter(id,num);
+                        arr.add(newChap);
+                        Log.d("Chapter",id);
+                    }
                     mangaClick.setAuthor(author);
                     mangaClick.setSummary(deskripsi);
                     mangaClick.setChapter_length(chapter_length);
+                    mangaClick.setChapter(arr);
                     presenter.setManga(mangaClick);
                     presenter.setPosition(position);
+                    presenter.setChap(arr);
                     sendPage(2);
                 } catch (JSONException e) {
                     e.printStackTrace();

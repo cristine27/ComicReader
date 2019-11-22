@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -21,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.example.comicreader.Model.Chapter;
 import com.example.comicreader.Model.Manga;
 import com.example.comicreader.Presenter.Presenter;
 import com.example.comicreader.R;
@@ -41,12 +43,14 @@ public class info_fragment extends Fragment {
     private Presenter presenter;
     private Context context;
     private ArrayList<Manga> mangaList;
+    private ArrayList<Chapter> chapters;
     private Manga mangaClick;
     private int position;
     ImageView poster;
     TextView title;
     TextView description;
     TextView chapter_length;
+    ListView lv_list_chap;
 
     public info_fragment() {
         // Required empty public constructor
@@ -70,15 +74,19 @@ public class info_fragment extends Fragment {
 
         this.mangaClick = presenter.getManga();
         this.position = presenter.getPosition();
+        this.chapters = presenter.getChap();
 
         this.poster = view.findViewById(R.id.iv_posterInfo);
         this.title = view.findViewById(R.id.tv_infotitletext);
         this.description = view.findViewById(R.id.tv_descinfotext);
         this.description.setMovementMethod(new ScrollingMovementMethod());
         this.chapter_length = view.findViewById(R.id.tv_chapterinfotext);
+        this.lv_list_chap = view.findViewById(R.id.list_chapter);
+
+        chapter_adapter adapter = new chapter_adapter(this.chapters,context);
 
         this.cretePage(mangaClick,position);
-
+        this.lv_list_chap.setAdapter(adapter);
         return view;
     }
 
@@ -94,9 +102,5 @@ public class info_fragment extends Fragment {
         title.setText(manga.getTitle());
         description.setText(manga.getSummary());
         chapter_length.setText(manga.getChapter_length());
-    }
-
-    public void getChapterList(){
-
     }
 }

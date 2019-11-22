@@ -2,8 +2,11 @@ package com.example.comicreader.Presenter;
 
 import android.content.Context;
 
+import com.example.comicreader.Model.Chapter;
 import com.example.comicreader.Model.Manga;
 import com.example.comicreader.View.InterfaceManga;
+
+import java.util.ArrayList;
 
 public class Presenter {
     private InterfaceManga interfaceManga;
@@ -11,10 +14,12 @@ public class Presenter {
     private Manga manga;
     private int position;
     private boolean temp;
+    private ArrayList<Chapter> chap;
 
     public Presenter(InterfaceManga interfaceManga, Context context){
         this.interfaceManga = interfaceManga;
         this.context = context;
+        this.chap = new ArrayList<>();
     }
 
     public void sendMangaInfo(){
@@ -47,5 +52,13 @@ public class Presenter {
 
     public int getPosition() {
         return position;
+    }
+
+    public void setChap(ArrayList<Chapter> chap) {
+        this.chap = chap;
+    }
+
+    public ArrayList<Chapter> getChap() {
+        return chap;
     }
 }

@@ -19,6 +19,7 @@ public class Manga {
     private String summary;
     private String author;
     private String chapter_length;
+    private ArrayList<Chapter> chapter;
 
     public Manga(String id, String title, String alias, String category, String status, String rating, String image) {
         this.id = id;
@@ -31,6 +32,7 @@ public class Manga {
         this.summary = "";
         this.author = "";
         this.chapter_length = "";
+        this.chapter = new ArrayList<>();
     }
 
     public String getId() {
@@ -119,6 +121,10 @@ public class Manga {
         else{
             return chapter_length;
         }
+    }
+
+    public void setChapter(ArrayList<Chapter> chapter){
+        this.chapter = chapter;
     }
 }
 
