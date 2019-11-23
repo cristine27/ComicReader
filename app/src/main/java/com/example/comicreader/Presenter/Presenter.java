@@ -16,12 +16,14 @@ public class Presenter {
     private boolean temp;
     private ArrayList<Chapter> chap;
     private ArrayList<String> kumpulanImg;
+    private String chapter_numb;
 
     public Presenter(InterfaceManga interfaceManga, Context context){
         this.interfaceManga = interfaceManga;
         this.context = context;
         this.chap = new ArrayList<>();
         this.kumpulanImg = new ArrayList<>();
+        this.chapter_numb = "";
     }
 
     public void sendMangaInfo(){
@@ -70,5 +72,13 @@ public class Presenter {
 
     public void setKumpulanImg(ArrayList<String> kumpulanImg) {
         this.kumpulanImg = kumpulanImg;
+    }
+
+    public void setChapter_numb(String chapter_numb) {
+        this.chapter_numb = chapter_numb;
+    }
+
+    public String getChapter_numb() {
+        return chapter_numb;
     }
 }

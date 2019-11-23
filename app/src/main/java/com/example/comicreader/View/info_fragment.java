@@ -4,6 +4,7 @@ package com.example.comicreader.View;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 
 import android.text.method.ScrollingMovementMethod;
@@ -24,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.bumptech.glide.Glide;
 import com.example.comicreader.Model.Chapter;
 import com.example.comicreader.Model.Manga;
@@ -68,6 +70,7 @@ public class info_fragment extends Fragment implements AdapterView.OnItemClickLi
             info_fragment.mangaList = (ArrayList<Manga>)mangaList;
             info_fragment.presenter = presenter;
         }
+        Animatoo.animateZoom(info_fragment.context);
         return info_fragment;
     }
 
@@ -135,6 +138,7 @@ public class info_fragment extends Fragment implements AdapterView.OnItemClickLi
                         System.out.println("isi response gambar "+ temp);
                         kumpulanImage.add(temp);
                     }
+                    presenter.setChapter_numb(nowChap.getNumber()+"");
                     presenter.setKumpulanImg(kumpulanImage);
                     presenter.changePage(3);
                 } catch (Exception e) {

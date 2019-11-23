@@ -9,8 +9,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.comicreader.Model.Manga;
 import com.example.comicreader.Presenter.Presenter;
 import com.example.comicreader.R;
@@ -26,6 +28,8 @@ public class chapter_fragment extends Fragment implements View.OnClickListener{
     private TextView tv_chapter,tv_chapterText;
     private ListView lv_list_chapter;
     private Button back;
+    private String chapter_num;
+
 
     public static chapter_fragment createChapterScreen(Context context,ArrayList<Manga> mangalist, Presenter presenter){
         if(chapter_fragment == null){
@@ -34,6 +38,7 @@ public class chapter_fragment extends Fragment implements View.OnClickListener{
             chapter_fragment.mangalist = mangalist;
             chapter_fragment.presenter = presenter;
         }
+        Animatoo.animateSpin(chapter_fragment.context);
         return chapter_fragment;
     }
 
@@ -47,6 +52,7 @@ public class chapter_fragment extends Fragment implements View.OnClickListener{
         View view =  inflater.inflate(R.layout.fragment_list_chapter, container, false);
 
         this.kumpulanImg = presenter.getKumpulanImg();
+        this.chapter_num = presenter.getChapter_numb();
 
         this.tv_chapter = view.findViewById(R.id.tv_chapter);
         this.tv_chapterText = view.findViewById(R.id.tv_chapterText);
@@ -54,6 +60,7 @@ public class chapter_fragment extends Fragment implements View.OnClickListener{
         this.back = view.findViewById(R.id.b_back_dariChapter);
         this.back.setOnClickListener(this);
 
+        this.tv_chapterText.setText(this.chapter_num);
         System.out.println("ukuran img " + this.kumpulanImg.size());
         this.adapter = new img_adapter(this.kumpulanImg,context);
         this.lv_list_chapter.setAdapter(this.adapter);

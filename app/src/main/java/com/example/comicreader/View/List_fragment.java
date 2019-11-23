@@ -4,15 +4,21 @@ package com.example.comicreader.View;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.android.volley.Request;
@@ -21,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.comicreader.Model.Chapter;
 import com.example.comicreader.Model.Manga;
 import com.example.comicreader.Presenter.Presenter;
@@ -30,9 +37,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -47,7 +53,9 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
     private ListView lvManga;
     private static final String JSON_URL = "https://www.mangaeden.com/api/list/0/";
     public ArrayList<Manga> mangaList;
-
+    private EditText et_search;
+    public list_adapter adapter;
+    public View view;
     public List_fragment() {
         // Required empty public constructor
     }
@@ -59,22 +67,44 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
             listFragment.mangaList = (ArrayList<Manga>) mangaList.clone();
             listFragment.presenter = presenter;
         }
+        Animatoo.animateSplit(listFragment.context);
         return listFragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_list_fragment, container, false);
-
+        view = inflater.inflate(R.layout.fragment_list_fragment, container, false);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        this.et_search = view.findViewById(R.id.et_search);
         this.lvManga = view.findViewById(R.id.my_list);
         this.getMangaList();
-
         this.lvManga.setOnItemClickListener(this);
+        et_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String input = et_search.getText().toString().toLowerCase(Locale.getDefault());
+                adapter.searchMangabyTitle(input);
+                close_keyboard();
+            }
+        });
         return view;
     }
 
+    public void close_keyboard(){
+        InputMethodManager imm = (InputMethodManager)((AppCompatActivity)getActivity()).getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 
     public void getMangaList() {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL,
@@ -103,7 +133,7 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
                                 mangaList.add(manga);
                             }
                             System.out.println("SIZE "+mangaList.size());
-                            list_adapter adapter = new list_adapter(mangaList,context);
+                            adapter = new list_adapter(mangaList,context);
                             lvManga.setAdapter(adapter);
 //                            sendList(mangaList);
                         } catch (JSONException e) {

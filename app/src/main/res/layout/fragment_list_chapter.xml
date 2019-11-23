@@ -32,7 +32,6 @@
         android:layout_width="match_parent"
         android:id="@+id/lv_list_chapter"
         android:layout_below="@id/b_back_dariChapter">
-
     </ListView>
 
 

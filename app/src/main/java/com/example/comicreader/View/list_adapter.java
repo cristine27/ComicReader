@@ -14,13 +14,16 @@ import com.example.comicreader.Model.Manga;
 import com.example.comicreader.R;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class list_adapter extends BaseAdapter {
     ArrayList<Manga> manga = new ArrayList<>();
+    ArrayList<Manga> cadanganManga = new ArrayList<>();
     Context context;
 
     public list_adapter(ArrayList<Manga> m, Context context){
         this.manga = m;
+        this.cadanganManga.addAll(m);
         this.context=context;
     }
 
@@ -62,5 +65,22 @@ public class list_adapter extends BaseAdapter {
             Glide.with(context).load("https://cdn.mangaeden.com/mangasimg/200x/"+mangaList.getImage()).into(poster);
         }
         return view;
+    }
+
+    public void searchMangabyTitle(String input){
+        input = input.toLowerCase(Locale.getDefault());
+        this.manga.clear();
+        if(input.length()==0){
+            this.manga.addAll(this.cadanganManga);
+        }
+        else{
+            for(Manga manga : this.cadanganManga){
+                if((manga.getTitle().toLowerCase(Locale.getDefault()).contains(input))||
+                        manga.getCategory().toLowerCase(Locale.getDefault()).contains(input)){
+                    this.manga.add(manga);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }
