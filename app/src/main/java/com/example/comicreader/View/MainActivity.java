@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceManga {
         }
         else if(id==2){
             if(this.info_fragment.isAdded()){
-                ft.show(this.info_fragment);
+                ft.show(info_fragment);
             }
             else{
                 ft.add(R.id.frame_container,this.info_fragment);
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceManga {
         }
         else if(id==3){
             if(this.chapter_fragment.isAdded()){
-                ft.show(this.chapter_fragment);
+                ft.show(chapter_fragment);
             }
             else{
                 ft.add(R.id.frame_container,this.chapter_fragment);

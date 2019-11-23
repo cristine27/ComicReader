@@ -73,7 +73,25 @@ public class chapter_fragment extends Fragment implements View.OnClickListener{
         switch(view.getId()){
             case R.id.b_back_dariChapter:
                 presenter.changePage(2);
+                this.onStop();
+                this.onDestroy();
+                this.onDestroyView();
                 break;
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }
