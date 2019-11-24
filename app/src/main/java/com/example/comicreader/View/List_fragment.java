@@ -56,6 +56,9 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
     private EditText et_search;
     public list_adapter adapter;
     public View view;
+
+    public boolean closeKeyboard = false;
+
     public List_fragment() {
         // Required empty public constructor
     }
@@ -95,15 +98,10 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
             public void afterTextChanged(Editable s) {
                 String input = et_search.getText().toString().toLowerCase(Locale.getDefault());
                 adapter.searchMangabyTitle(input);
-                close_keyboard();
             }
         });
-        return view;
-    }
 
-    public void close_keyboard(){
-        InputMethodManager imm = (InputMethodManager)((AppCompatActivity)getActivity()).getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        return view;
     }
 
     public void getMangaList() {
