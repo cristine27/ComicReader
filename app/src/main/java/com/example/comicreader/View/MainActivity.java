@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity implements InterfaceManga {
         this.mangaList = new ArrayList<>();
 
         this.list_fragment = List_fragment.createHomeScreen(this,this.mangaList,presenter);
-        this.info_fragment = info_fragment.createInfoScreen(this,this.mangaList,presenter);
-        this.chapter_fragment = chapter_fragment.createChapterScreen(this,this.mangaList,presenter);
+
+
         this.fm = this.getSupportFragmentManager();
         FragmentTransaction ft =this.fm.beginTransaction();
         ft.add(R.id.frame_container, this.list_fragment).commit();
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceManga {
     @Override
     public void changePage(int id) {
         FragmentTransaction ft = this.fm.beginTransaction();
+
         if(id==1){
             if(this.list_fragment.isAdded()){
                 ft.show(this.list_fragment);
@@ -49,39 +50,42 @@ public class MainActivity extends AppCompatActivity implements InterfaceManga {
                 ft.add(R.id.frame_container,this.list_fragment);
             }
 
-            if(this.info_fragment.isAdded()){
-                ft.hide(this.info_fragment);
+            if(this.info_fragment != null){
+                this.info_fragment = null;
             }
         }
         else if(id==2){
-            if(this.info_fragment.isAdded()){
-                ft.show(info_fragment);
-            }
-            else{
+            if(this.info_fragment == null){
+                this.info_fragment = info_fragment.createInfoScreen(this,this.mangaList,presenter);
                 ft.add(R.id.frame_container,this.info_fragment);
+            }
+
+            if(this.info_fragment != null){
+                ft.show(this.info_fragment);
             }
 
             if(this.list_fragment.isAdded()){
                 ft.hide(this.list_fragment);
             }
-            if(this.chapter_fragment.isAdded()){
-                ft.hide(this.chapter_fragment);
+
+            if(this.chapter_fragment != null){
+                ft.remove(this.chapter_fragment);
+                this.chapter_fragment = null;
             }
+
         }
         else if(id==3){
-            if(this.chapter_fragment.isAdded()){
-                ft.show(chapter_fragment);
+            if(this.chapter_fragment == null){
+                this.chapter_fragment = chapter_fragment.createChapterScreen(this,this.mangaList,presenter);
             }
-            else{
-                ft.add(R.id.frame_container,this.chapter_fragment);
-            }
+
+            ft.add(R.id.frame_container,this.chapter_fragment);
+
 
             if(this.info_fragment.isAdded()){
                 ft.hide(this.info_fragment);
             }
-            if(this.list_fragment.isAdded()){
-                ft.hide(this.list_fragment);
-            }
+
         }
         ft.commit();
     }

@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -100,6 +102,7 @@ public class info_fragment extends Fragment implements AdapterView.OnItemClickLi
 
         this.lv_list_chap.setOnItemClickListener(this);
 
+
         return view;
     }
 
@@ -144,7 +147,7 @@ public class info_fragment extends Fragment implements AdapterView.OnItemClickLi
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("ChapterKlik","GAGAL BRO");
+
             }
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this.context);
@@ -152,7 +155,9 @@ public class info_fragment extends Fragment implements AdapterView.OnItemClickLi
     }
     public void onClick(View view) {
         if(view.getId() == this.back.getId()){
+            getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
             presenter.changePage(1);
         }
     }
+
 }

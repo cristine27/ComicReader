@@ -112,7 +112,6 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
 
                     @Override
                     public void onResponse(String response) {
-                        Log.d("TEST", "MASUK");
                         try {
                             JSONObject obj = new JSONObject(response);
                             JSONArray mangalist = obj.getJSONArray("manga");
@@ -129,10 +128,9 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
                                         mangaReader.getString("s"),
                                         mangaReader.getString("h"),
                                         mangaReader.getString("im"));
-                                Log.d("TEST PRINT", manga.getTitle().toString());
+
                                 mangaList.add(manga);
                             }
-                            System.out.println("SIZE "+mangaList.size());
                             adapter = new list_adapter(mangaList,context);
                             lvManga.setAdapter(adapter);
 //                            sendList(mangaList);
@@ -144,7 +142,7 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("TEST", "GAGAL.. TRY AGAIN BOSS");
+
                     }
                 });
         RequestQueue requestQueue = Volley.newRequestQueue(this.context);
@@ -153,19 +151,15 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, final int position, final long id) {
-        System.out.println("position " + position);
         final int pos = position;
         final Manga mangaClick = mangaList.get(position);
-        System.out.println("judul " + mangaList.get(position).getTitle());
         String idManga = mangaClick.getId();
-        System.out.println("idKlik "+ idManga);
         String url = "https://www.mangaeden.com/api/manga/"+idManga+"/";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
-                    Log.d("KLIK","MASUK KLIK MANGA");
                     JSONObject obj = new JSONObject(response);
                     String deskripsi = obj.getString("description");
                     String author = obj.getString("author");
@@ -180,7 +174,6 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
                         num = eachChap.getInt(0);
                         Chapter newChap = new Chapter(id,num);
                         arr.add(newChap);
-                        Log.d("Chapter",id);
                     }
                     mangaClick.setAuthor(author);
                     mangaClick.setSummary(deskripsi);
@@ -197,7 +190,7 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("KLIK","GAGAL.. TRY AGAIN");
+
             }
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this.context);
