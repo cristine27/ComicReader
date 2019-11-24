@@ -204,10 +204,6 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
         requestQueue.add(stringRequest);
     }
 
-    public void MangaInfo(){
-        this.presenter.sendMangaInfo();
-    }
-
     public void sendPage(int id){
         this.presenter.changePage(id);
     }

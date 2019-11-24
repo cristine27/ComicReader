@@ -45,7 +45,6 @@ public class img_adapter extends BaseAdapter {
         ImageView gambar = view.findViewById(R.id.iv_gambar);
 
         String eachGambar = this.kumpulanImg.get(position);
-        System.out.println("idgambar "+eachGambar);
         if(!eachGambar.equals("null")){
             Glide.with(context).load("https://cdn.mangaeden.com/mangasimg/200x/"+eachGambar).into(gambar);
         }

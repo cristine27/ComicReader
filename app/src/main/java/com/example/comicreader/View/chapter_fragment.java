@@ -61,7 +61,6 @@ public class chapter_fragment extends Fragment implements View.OnClickListener{
         this.back.setOnClickListener(this);
 
         this.tv_chapterText.setText(this.chapter_num);
-        System.out.println("ukuran img " + this.kumpulanImg.size());
         this.adapter = new img_adapter(this.kumpulanImg,context);
         this.lv_list_chapter.setAdapter(this.adapter);
 

@@ -52,7 +52,6 @@ public class list_adapter extends BaseAdapter {
         TextView category = view.findViewById(R.id.tv_categoryText);
         ImageView poster = view.findViewById(R.id.poster);
 
-        ArrayList<String> categori = new ArrayList<>();
         Manga mangaList = this.manga.get(i);
 
         title.setText(mangaList.getTitle());

@@ -13,7 +13,6 @@ public class Presenter {
     private Context context;
     private Manga manga;
     private int position;
-    private boolean temp;
     private ArrayList<Chapter> chap;
     private ArrayList<String> kumpulanImg;
     private String chapter_numb;
@@ -32,7 +31,6 @@ public class Presenter {
     }
 
     public void changePage(int id){
-        System.out.println("change page berhasil");
         this.interfaceManga.changePage(id);
     }
 
@@ -42,12 +40,6 @@ public class Presenter {
 
     public void setPosition(int position) {
         this.position = position;
-    }
-
-    public void sendEncap(){
-        if(this.temp == true){
-            this.sendMangaInfo();
-        }
     }
 
     public Manga getManga() {
