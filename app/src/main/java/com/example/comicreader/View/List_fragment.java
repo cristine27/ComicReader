@@ -149,6 +149,7 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, final int position, final long id) {
+        this.closeKeyboard();
         final int pos = position;
         final Manga mangaClick = mangaList.get(position);
         String idManga = mangaClick.getId();
@@ -197,5 +198,10 @@ public class List_fragment extends Fragment implements AdapterView.OnItemClickLi
 
     public void sendPage(int id){
         this.presenter.changePage(id);
+    }
+
+    public void closeKeyboard(){
+        InputMethodManager imm = (InputMethodManager)((AppCompatActivity)getActivity()).getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
